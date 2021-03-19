@@ -1,0 +1,23 @@
+.head {
+  text-align: center;
+  font-family: 'Kalam', cursive;
+  font-weight: bold;
+  font-size: 45px;
+  margin-top: 3%;
+  text-decoration: underline;
+}
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid black;
+  border-radius: 0;
+}
+input:focus {
+  box-shadow: none;
+  background-color: transparent;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
