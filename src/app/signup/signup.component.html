@@ -1,29 +1,53 @@
 <p class="head">SignUp</p>
 <div class="d-flex align-items-center flex-column justify-content-center h-100">
-  <form class="col-md-4">
+  <form class="col-md-4" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div class="form-group mt-1">
-      <input class="form-control form-control-md" placeholder="Username" type="text">
+      <input class="form-control form-control-md" placeholder="Username*" minlength="3" type="text" formControlName="userName">
     </div>
+    <div class="errMsg" *ngIf="signupFormData.userName.touched">
+      <small *ngIf="signupFormData.userName.errors?.required" class="text-danger">Username is required</small>
+      <small *ngIf="signupFormData.userName.errors?.invalidLength" class="text-danger">Username must be > 3 characters</small>
+    </div>
+
     <div class="form-group">
-      <input class="form-control form-control-md" placeholder="Email" type="email">
+      <input class="form-control form-control-md" placeholder="Email*" type="email" formControlName="email">
     </div>
+    <div class="errMsg" *ngIf="signupFormData.email.touched">
+      <small *ngIf="signupFormData.email.errors?.required" class="text-danger">Email ID is required</small>
+      <small *ngIf="signupFormData.email.errors?.invalidEmail" class="text-danger">Enter a valid email id (eg. hritvik@gm.com)</small>
+      <small *ngIf="signupFormData.email.errors?.duplicateEmail" class="text-danger">This email id is already in use</small>
+    </div>
+
     <div class="form-group">
-      <input class="form-control form-control-md" placeholder="Address" type="text">
+      <input class="form-control form-control-md" placeholder="Address" type="text" formControlName="address">
     </div>
+
     <div class="form-group">
-      <input class="form-control form-control-md" placeholder="Contact Number" type="number">
+      <input class="form-control form-control-md" placeholder="Contact Number*" type="number" formControlName="phoneNumber">
     </div>
+    <div class="errMsg" *ngIf="signupFormData.phoneNumber.touched">
+      <small *ngIf="signupFormData.phoneNumber.errors?.required" class="text-danger">Contact Number is required</small>
+      <small *ngIf="signupFormData.phoneNumber.errors?.invalidContactNo" class="text-danger">Enter a valid 10 digit contact number<br>(eg. 1234567890)</small>
+    </div>
+
     <div class="form-group">
-      <input class="form-control form-control-md" placeholder="Gender" type="text">
+      <input class="form-control form-control-md" placeholder="Password*" type="password" formControlName="pass">
     </div>
+    <div class="errMsg" *ngIf="signupFormData.pass.touched">
+      <small *ngIf="signupFormData.pass.errors?.required" class="text-danger">Password is required</small>
+      <small *ngIf="signupFormData.pass.errors?.invalidPass" class="text-danger">Password must contain at least 4 chars, 1 lower, 1 upper & 1 digit<br>(eg. Abbc34, GHYw0078, Hrit0)</small>
+    </div>
+
     <div class="form-group">
-      <input class="form-control form-control-md" placeholder="Password" type="password">
+      <input class="form-control form-control-md" placeholder="Confirm Password*" type="password" formControlName="confirmPass">
     </div>
-    <div class="form-group">
-      <input class="form-control form-control-md" placeholder="Confirm Password" type="password">
+    <div class="errMsg" *ngIf="signupFormData.confirmPass.touched">
+      <small *ngIf="signupFormData.confirmPass.errors?.required" class="text-danger">Confirm Password is required</small>
+      <small *ngIf="signupFormData.confirmPass.errors?.passMismatch" class="text-danger">Passwords doesn't match</small>
     </div>
+
     <div class="form-group mt-5">
-      <button type="submit" class="btn btn-warning btn-lg btn-block"><i class="fas fa-user-plus"></i>&nbsp;SignUp</button>
+      <button type="submit" (click)="signup(signupForm.value)" [disabled]="!signupForm.valid" class="btn btn-warning btn-lg btn-block"><i class="fas fa-user-plus"></i>&nbsp;SignUp</button>
     </div>
   </form>
 </div>

@@ -1,18 +1,15 @@
-<!--<label>-->
-<!--  Name:-->
-<!--  <input type="text" [formControl]="name">-->
-<!--</label>-->
 <p class="head">Login</p>
 <div class="d-flex align-items-center flex-column justify-content-center h-100">
-  <form class="col-md-3">
+  <form class="col-md-3" [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
     <div class="form-group mt-3">
-      <input class="form-control form-control-lg" placeholder="Username" type="text">
+      <input class="form-control form-control-lg" placeholder="Email" type="email" formControlName="email">
     </div>
     <div class="form-group">
-      <input class="form-control form-control-lg" placeholder="Password" type="password">
+      <input class="form-control form-control-lg" placeholder="Password" type="password" formControlName="pass">
     </div>
     <div class="form-group mt-5">
-      <button type="submit" class="btn btn-info btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</button>
+      <button type="submit" [disabled]="!loginForm.valid" class="btn btn-info btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</button>
     </div>
   </form>
 </div>
+
