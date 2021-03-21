@@ -1,0 +1,15 @@
+<div class="jumbotron d-flex align-items-center">
+  <div class="container text-center">
+    <h1 id="welUsr">Welcome <i id="icoLeft" class="fas fa-chevron-left"></i>{{ getUsrValues().userName }}<i id="icoRight" class="fas fa-chevron-right"></i></h1>
+    <div class="aboutusr">
+      <i class="fas fa-user"></i>
+      <p>About Me</p>
+    </div>
+    <div class="d-flex flex-column usrDetails">
+      <div class="p-2"><u>Username</u>: {{ getUsrValues().userName }}</div>
+      <div class="p-2"><u>Email ID</u>: {{ getUsrValues().email }}</div>
+      <div class="p-2"><u>Address</u>: {{ getUsrValues().address }}</div>
+      <div class="p-2"><u>Phone Number</u>: {{ getUsrValues().phoneNo }}</div>
+    </div>
+  </div>
+</div>

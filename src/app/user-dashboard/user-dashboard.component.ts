@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from '../services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if (this.localStorageService.getItem('loggedInUser') === null) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
+  getUsrValues(): any {
+    return this.localStorageService.getObj('loggedInUser');
+  }
 }

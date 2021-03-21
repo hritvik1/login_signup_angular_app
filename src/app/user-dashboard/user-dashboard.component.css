@@ -1,0 +1,28 @@
+.jumbotron {
+  font-family: 'Kalam', cursive;
+  background-color: transparent;
+}
+.jumbotron #welUsr {
+  font-weight: lighter;
+  font-size: 10vmin;
+}
+.jumbotron #icoLeft {
+  color: red;
+}
+.jumbotron #icoRight {
+  color: blue;
+}
+.jumbotron .aboutusr {
+  font-size: 6vmin;
+  text-decoration: underline;
+  margin-top: 4vw;
+}
+.jumbotron .aboutusr i {
+  color: #03bafc;
+}
+.jumbotron .aboutusr p {
+  margin-top: -6px;
+}
+.jumbotron .usrDetails {
+  font-size: 4vmin;
+}
