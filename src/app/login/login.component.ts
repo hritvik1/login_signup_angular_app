@@ -28,7 +28,7 @@ export class LoginComponent  implements OnInit {
   onLogin(data: any): any {
     if (this.loginForm.valid && this.customValidator.loginValidate(data.email, data.pass)) {
       alert('Login Successful 👍');
-      this.router.navigate(['']);
+      this.router.navigate(['usrDboard']);
     }
     this.loginForm.reset();
   }

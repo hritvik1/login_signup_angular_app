@@ -4,12 +4,16 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto"></ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="loginStatus() === false">
             <button (click)="login()" type="button" class="btn btn-outline-primary mr-3"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</button>
             <button (click)="signup()" type="button" class="btn btn-outline-success mr-3"><i class="fas fa-user-plus"></i>&nbsp;SignUp</button>
+        </li>
+        <li class="nav-item" *ngIf="loginStatus() === true">
+          <button (click)="logout()" type="button" class="btn btn-outline-primary mr-3"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</button>
+          <button (click)="deleteAccount()" type="button" class="btn btn-outline-danger mr-3"><i class="fas fa-user-times"></i>&nbsp;Delete Account</button>
         </li>
       </ul>
     </div>
