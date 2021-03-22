@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { LocalStorageService } from './local-storage.service';
+import { CookieStorageService } from '../services/cookie-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,9 @@ import { LocalStorageService } from './local-storage.service';
 
 export class ValidationService {
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(
+    private cookieStorageService: CookieStorageService
+  ) { }
 
   nameLengthValidator(): ValidatorFn {
     return (control: FormGroup): { [key: string]: any } => {
@@ -25,7 +27,7 @@ export class ValidationService {
     return (control: FormGroup): { [key: string]: any } => {
       if (!control.value) {
         return null;
-      } else if (this.localStorageService.getItem(control.value) != null) {
+      } else if (this.cookieStorageService.checkCookie(control.value)) {
         return { duplicateEmail: true };
       } else {
         const regex = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
@@ -79,10 +81,10 @@ export class ValidationService {
   }
 
   loginValidate(email: string, pass: string): any {
-    const tempData: any = this.localStorageService.getObj(email);
-    if (tempData != null) {
+    if (this.cookieStorageService.checkCookie(email)) {
+      const tempData: any = this.cookieStorageService.getObj(email);
       if (tempData.pass === pass) {
-        this.localStorageService.setItem('loggedInUser', JSON.stringify(tempData));
+        this.cookieStorageService.setItem('loggedInUser', JSON.stringify(tempData));
         return true;
       } else {
         alert('Invalid Credentials, try again!!!');

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from '../services/local-storage.service';
+import { CookieStorageService } from '../services/cookie-storage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,17 +10,17 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent implements OnInit {
 
   constructor(
-    private localStorageService: LocalStorageService,
+    private cookieStorageService: CookieStorageService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    if (this.localStorageService.getItem('loggedInUser') === null) {
+    if (!this.cookieStorageService.checkCookie('loggedInUser')) {
       this.router.navigateByUrl('/login');
     }
   }
 
   getUsrValues(): any {
-    return this.localStorageService.getObj('loggedInUser');
+    return this.cookieStorageService.getObj('loggedInUser');
   }
 }

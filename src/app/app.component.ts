@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from './services/local-storage.service';
+import { CookieStorageService } from './services/cookie-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,10 @@ import { LocalStorageService } from './services/local-storage.service';
 })
 
 export class AppComponent {
+
   constructor(
     private router: Router,
-    private localStorageService: LocalStorageService
+    private cookieStorageService: CookieStorageService
   ) { }
 
   login(): any {
@@ -23,32 +24,24 @@ export class AppComponent {
   }
 
   loginStatus(): any {
-    if (this.localStorageService.getItem('loggedInUser') != null) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.cookieStorageService.checkCookie('loggedInUser');
   }
 
   logout(): any {
-    this.localStorageService.removeItem('loggedInUser');
+    this.cookieStorageService.removeItem('loggedInUser');
     this.router.navigateByUrl('/login');
   }
 
   deleteAccount(): void {
     const conf = confirm('Are you sure you want to delete your account!!!!');
     if (conf === true) {
-      const tempData = this.localStorageService.getObj('loggedInUser');
-      this.localStorageService.removeItem(tempData.email);
+      const tempData = this.cookieStorageService.getObj('loggedInUser');
+      this.cookieStorageService.removeItem(tempData.email);
       this.logout();
     }
   }
 
   errorPage(): any {
-    if (this.localStorageService.getItem('errorPageObj') != null) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.cookieStorageService.checkCookie('errorPageObj');
   }
 }
