@@ -1,4 +1,4 @@
-<div class="back_img">
+<div *ngIf="errorPage() === false" class="back_img">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <h5 class="navbar-brand ml-2"><i class="fab fa-angular"></i>&nbsp;&nbsp;Login/Signup App</h5>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -18,5 +18,8 @@
       </ul>
     </div>
   </nav>
+  <router-outlet></router-outlet>
+</div>
+<div *ngIf="errorPage() === true">
   <router-outlet></router-outlet>
 </div>

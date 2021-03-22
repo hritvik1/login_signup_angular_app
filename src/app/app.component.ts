@@ -43,4 +43,12 @@ export class AppComponent {
       this.logout();
     }
   }
+
+  errorPage(): any {
+    if (this.localStorageService.getItem('errorPageObj') != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

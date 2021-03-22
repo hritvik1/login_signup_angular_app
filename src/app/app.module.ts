@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    ErrorPageComponent
   ],
   imports: [
     FormsModule,
