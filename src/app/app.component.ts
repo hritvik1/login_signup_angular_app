@@ -15,19 +15,19 @@ export class AppComponent {
     private cookieStorageService: CookieStorageService
   ) { }
 
-  login(): any {
+  login(): void {
     this.router.navigateByUrl('/login');
   }
 
-  signup(): any {
+  signup(): void {
     this.router.navigateByUrl('/signup');
   }
 
-  loginStatus(): any {
+  loginStatus(): boolean {
     return this.cookieStorageService.checkCookie('loggedInUser');
   }
 
-  logout(): any {
+  logout(): void {
     this.cookieStorageService.removeItem('loggedInUser');
     this.router.navigateByUrl('/login');
   }
@@ -41,7 +41,7 @@ export class AppComponent {
     }
   }
 
-  errorPage(): any {
+  errorPage(): boolean {
     return this.cookieStorageService.checkCookie('errorPageObj');
   }
 }

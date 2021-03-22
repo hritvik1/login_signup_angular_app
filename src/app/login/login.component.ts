@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent  implements OnInit {
 
   loginForm: FormGroup;
@@ -25,8 +26,8 @@ export class LoginComponent  implements OnInit {
     });
   }
 
-  onLogin(data: any): any {
-    if (this.loginForm.valid && this.customValidator.loginValidate(data.email, data.pass)) {
+  onLogin(data: any): void {
+    if (this.loginForm.valid && this.customValidator.loginValidate(data.email.toLowerCase(), data.pass)) {
       alert('Login Successful 👍');
       this.router.navigate(['usrDboard']);
     }

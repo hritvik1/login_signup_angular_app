@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
     this.cookieStorageService.setItem(data.email, JSON.stringify(this.newUser));
   }
 
-  onSubmit(): any {
+  onSubmit(): void {
     if (this.signupForm.valid) {
       this.signupForm.reset();
       alert('Account Created Successfully 👍');

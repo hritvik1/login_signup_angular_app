@@ -15,7 +15,7 @@ export class CookieStorageService {
     this.cookieService.set(key, value);
   }
 
-  public getItem(key: string): any {
+  public getItem(key: string): string {
     return this.cookieService.get(key);
   }
 
@@ -27,7 +27,7 @@ export class CookieStorageService {
     return JSON.parse(this.getItem(key));
   }
 
-  public checkCookie(key: string): any {
+  public checkCookie(key: string): boolean {
     return this.cookieService.check(key);
   }
 }

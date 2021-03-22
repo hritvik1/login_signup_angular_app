@@ -25,7 +25,7 @@ export class ErrorPageComponent implements OnInit {
     this.cookieStorageService.setItem('errorPageObj', 'true');
   }
 
-  toHomepage(): any {
+  toHomepage(): void {
     this.cookieStorageService.removeItem('errorPageObj');
     if (this.cookieStorageService.checkCookie('loggedInUser')) {
       this.cookieStorageService.removeItem('loggedInUser');

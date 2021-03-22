@@ -42,7 +42,7 @@ export class ValidationService {
       if (!control.value) {
         return null;
       }
-      const regex = new RegExp('[0-9]{10}');
+      const regex = new RegExp('^[0-9]{10}$');
       const valid = regex.test(control.value);
       return valid ? null : { invalidContactNo: true };
     };
@@ -80,7 +80,7 @@ export class ValidationService {
     };
   }
 
-  loginValidate(email: string, pass: string): any {
+  loginValidate(email: string, pass: string): boolean {
     if (this.cookieStorageService.checkCookie(email)) {
       const tempData: any = this.cookieStorageService.getObj(email);
       if (tempData.pass === pass) {
