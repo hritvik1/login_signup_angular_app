@@ -10,7 +10,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'usrDboard', component: UserDashboardComponent},
-  {path: '**', component: ErrorPageComponent}
+  {path: '404_not_found', component: ErrorPageComponent},
+  {path: '**', redirectTo: '/404_not_found'}
 ];
 
 @NgModule({
