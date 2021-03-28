@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ValidationService } from '../services/validation.service';
 import { Router } from '@angular/router';
-import { CookieStorageService } from '../services/cookie-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private cookieStorageService: CookieStorageService,
+    private localStorageService: LocalStorageService,
     private customValidator: ValidationService,
     private router: Router
   ) { }
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
     this.newUser.address = data.address;
     this.newUser.phoneNo = data.phoneNumber;
     this.newUser.pass = data.pass;
-    this.cookieStorageService.setItem(data.email, JSON.stringify(this.newUser));
+    this.localStorageService.setItem(data.email, JSON.stringify(this.newUser));
   }
 
   onSubmit(): void {

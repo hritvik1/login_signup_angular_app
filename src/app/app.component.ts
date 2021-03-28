@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieStorageService } from './services/cookie-storage.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private cookieStorageService: CookieStorageService
+    private cookieStorageService: CookieStorageService,
+    private localStorageService: LocalStorageService
   ) { }
 
   login(): void {
@@ -36,7 +38,7 @@ export class AppComponent {
     const conf = confirm('Are you sure you want to delete your account!!!!');
     if (conf === true) {
       const tempData = this.cookieStorageService.getObj('loggedInUser');
-      this.cookieStorageService.removeItem(tempData.email);
+      this.localStorageService.removeItem(tempData.email);
       this.logout();
     }
   }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { CookieStorageService } from '../services/cookie-storage.service';
+import { CookieStorageService } from './cookie-storage.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { CookieStorageService } from '../services/cookie-storage.service';
 export class ValidationService {
 
   constructor(
-    private cookieStorageService: CookieStorageService
+    private cookieStorageService: CookieStorageService,
+    private localStorageService: LocalStorageService
   ) { }
 
   nameLengthValidator(): ValidatorFn {
@@ -27,7 +29,7 @@ export class ValidationService {
     return (control: FormGroup): { [key: string]: any } => {
       if (!control.value) {
         return null;
-      } else if (this.cookieStorageService.checkCookie(control.value)) {
+      } else if (this.localStorageService.checkStorage(control.value)) {
         return { duplicateEmail: true };
       } else {
         const regex = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
@@ -80,19 +82,19 @@ export class ValidationService {
     };
   }
 
-  loginValidate(email: string, pass: string): boolean {
-    if (this.cookieStorageService.checkCookie(email)) {
-      const tempData: any = this.cookieStorageService.getObj(email);
+  loginValidate(email: string, pass: string): string {
+    if (this.localStorageService.checkStorage(email)) {
+      const tempData = this.localStorageService.getObj(email);
       if (tempData.pass === pass) {
         this.cookieStorageService.setItem('loggedInUser', JSON.stringify(tempData));
-        return true;
+        return 'ok';
       } else {
         alert('Invalid Credentials, try again!!!');
-        return false;
+        return 'passInvalid';
       }
     } else {
       alert('No Matching Credentials Found!!!!');
-      return false;
+      return 'emailNotExist';
     }
   }
 }

@@ -27,10 +27,14 @@ export class LoginComponent  implements OnInit {
   }
 
   onLogin(data: any): void {
-    if (this.loginForm.valid && this.customValidator.loginValidate(data.email.toLowerCase(), data.pass)) {
+    const status = this.customValidator.loginValidate(data.email.toLowerCase(), data.pass);
+    if (this.loginForm.valid && status === 'ok') {
       alert('Login Successful 👍');
       this.router.navigate(['usrDboard']);
+    } else if (status === 'emailNotExist') {
+      this.loginForm.reset();
+    } else if (status === 'passInvalid') {
+      this.loginForm.controls.pass.reset();
     }
-    this.loginForm.reset();
   }
 }
